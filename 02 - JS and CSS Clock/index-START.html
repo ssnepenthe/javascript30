@@ -5,16 +5,13 @@
   <title>JS + CSS Clock</title>
 </head>
 <body>
-
-
-    <div class="clock">
-      <div class="clock-face">
-        <div class="hand hour-hand"></div>
-        <div class="hand min-hand"></div>
-        <div class="hand second-hand"></div>
-      </div>
+  <div class="clock">
+    <div class="clock-face">
+      <div class="hand hour-hand"></div>
+      <div class="hand min-hand"></div>
+      <div class="hand second-hand"></div>
     </div>
-
+  </div>
 
   <style>
     html {
@@ -62,13 +59,45 @@
       background:black;
       position: absolute;
       top:50%;
+      transform: rotate(90deg);
+      transform-origin: 100%;
+      transition: all 0.05s;
+      transition-timing-function: cubic-bezier(1, 0, .07, 1.75);
     }
-
   </style>
 
   <script>
+    const DEGREES_PER_MINUTE = DEGREES_PER_SECOND = 6;
+    const DEGREES_PER_HOUR = 30;
+    const DEGREES_PER_CIRCLE = 360;
+    const HAND_OFFSET = 90;
+    const MINUTES_PER_HOUR = SECONDS_PER_MINUTE = 60;
 
+    const HANDS = {
+      second: document.querySelector('.second-hand'),
+      minute: document.querySelector('.min-hand'),
+      hour: document.querySelector('.hour-hand'),
+    };
 
+    function setTime() {
+      let now = new Date(),
+        seconds = now.getSeconds(), // 0 - 59
+        secondsPercent = seconds / SECONDS_PER_MINUTE,
+        secondsDegrees = secondsPercent * DEGREES_PER_CIRCLE + HAND_OFFSET,
+        minutes = now.getMinutes(), // 0 - 59
+        minutesPercent = minutes / MINUTES_PER_HOUR,
+        minutesDegrees = (minutesPercent * DEGREES_PER_CIRCLE + secondsPercent * DEGREES_PER_SECOND) + HAND_OFFSET,
+        hours = now.getHours(), // 0 - 23
+        hoursPercent = (hours % 12) / 12,
+        hoursDegrees = (hoursPercent * DEGREES_PER_CIRCLE + minutesPercent * DEGREES_PER_HOUR) + HAND_OFFSET;
+
+      HANDS.second.style.transform = `rotate(${secondsDegrees}deg)`;
+      HANDS.minute.style.transform = `rotate(${minutesDegrees}deg)`;
+      HANDS.hour.style.transform = `rotate(${hoursDegrees}deg)`;
+    }
+
+    setInterval(setTime, 1000);
+    setTime();
   </script>
 </body>
 </html>
