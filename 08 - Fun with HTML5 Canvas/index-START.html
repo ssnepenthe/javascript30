@@ -17,41 +17,24 @@
     const canvas = document.querySelector('#draw');
     const ctx = canvas.getContext('2d');
 
-    canvas.height = window.innerHeight;
-    canvas.width = window.innerWidth;
-
-    ctx.lineCap = 'round';
-    ctx.lineJoin = 'round';
-    ctx.lineWidth = 100;
-    ctx.strokeStyle = '#bada55';
-
     let direction = true;
     let hue = 0;
     let isDrawing = false;
     let lastX = 0;
     let lastY = 0;
 
-    function draw(e) {
-      if (! isDrawing) {
-        return;
-      }
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
 
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.lineWidth = 100;
+
+    function updateStrokeStyle() {
       ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+    }
 
-      ctx.beginPath();
-      ctx.moveTo(lastX, lastY);
-      ctx.lineTo(e.offsetX, e.offsetY);
-      ctx.stroke();
-
-      lastX = e.offsetX;
-      lastY = e.offsetY;
-
-      hue++;
-
-      if (hue >= 360) {
-        hue = 0;
-      }
-
+    function updateLineWidth() {
       if (ctx.lineWidth >= 100 || ctx.lineWidth <= 1) {
         direction = ! direction;
       }
@@ -62,6 +45,29 @@
         ctx.lineWidth--;
       }
     }
+
+    function draw(e) {
+      if (! isDrawing) {
+        return;
+      }
+
+      ctx.beginPath();
+      ctx.moveTo(lastX, lastY);
+      ctx.lineTo(e.offsetX, e.offsetY);
+      ctx.stroke();
+
+      lastX = e.offsetX;
+      lastY = e.offsetY;
+
+      if (++hue >= 360) {
+        hue = 0;
+      }
+
+      updateStrokeStyle();
+      updateLineWidth();
+    }
+
+    updateStrokeStyle();
 
     canvas.addEventListener('mousemove', draw);
     canvas.addEventListener('mousedown', e => {
