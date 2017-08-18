@@ -18,28 +18,63 @@
     }
 
     // Regular
+    console.log('holler');
 
     // Interpolated
+    let funcName = 'sprintf';
+    console.log('This is like %s', funcName);
 
     // Styled
+    console.log('%c How colorful!', 'color: red;');
 
     // warning!
+    console.warn('YIKES!');
 
     // Error :|
+    console.error('FAIL WHALE!');
 
     // Info
+    console.info('1 + 1 = 2');
 
     // Testing
+    let p = document.querySelector('p');
+    console.assert(p.classList.contains('paragraph'), 'p should have a class of "paragraph"');
 
     // clearing
+    // console.clear();
 
     // Viewing DOM Elements
+    console.log(p);
+    console.dir(p);
 
     // Grouping together
+    dogs.forEach(dog => {
+      if (dog.name === dogs[0].name) {
+        console.group(dog.name);
+      } else {
+        console.groupCollapsed(dog.name);
+      }
+
+      console.log(`${dog.name} is ${dog.age} years old`);
+      console.log(`That is ${dog.age * 7} dog years!`);
+      console.groupEnd(dog.name);
+    });
 
     // counting
+    console.count('My name is Ryan');
+    console.count('My name is Ryan');
+    console.count('My name is Ryan');
 
     // timing
+    console.time('Fetch from Github');
+    fetch('https://api.github.com/users/ssnepenthe')
+      .then(data => data.json())
+      .then(data => {
+        console.timeEnd('Fetch from Github');
+        console.log(data);
+      });
+
+    console.table(dogs);
 
   </script>
 </body>
