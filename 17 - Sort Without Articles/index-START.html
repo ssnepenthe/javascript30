@@ -50,10 +50,8 @@
     list.innerHTML = bands
       .sort((one, two) => {
         const regex = new RegExp(/^(the|an?)\s+/, 'i');
-        const newOne = one.replace(regex, '');
-        const newTwo = two.replace(regex, '');
 
-        return newOne > newTwo ? 1 : -1;
+        return one.replace(regex, '') > two.replace(regex, '') ? 1 : -1;
       })
       .map(band => `<li>${band}</li>`)
       .join('');
