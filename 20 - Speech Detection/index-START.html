@@ -3,18 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <title>Speech Detection</title>
-</head>
-<body>
-
-  <div class="words" contenteditable>
-  </div>
-
-<script>
-  window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-
-
-</script>
-
 
   <style>
     html {
@@ -22,24 +10,25 @@
     }
 
     body {
-      background:#ffc600;
+      background: #ffc600;
       font-family: 'helvetica neue';
-      font-weight: 200;
       font-size: 20px;
+      font-weight: 200;
     }
 
     .words {
-      max-width:500px;
-      margin:50px auto;
-      background:white;
-      border-radius:5px;
-      box-shadow:10px 10px 0 rgba(0,0,0,0.1);
-      padding:1rem 2rem 1rem 5rem;
+      background: white;
       background: -webkit-gradient(linear, 0 0, 0 100%, from(#d9eaf3), color-stop(4%, #fff)) 0 4px;
       background-size: 100% 3rem;
+      border-radius: 5px;
+      box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.1);
+      line-height: 3rem;
+      margin: 50px auto;
+      max-width: 500px;
+      padding: 1rem 2rem 1rem 5rem;
       position: relative;
-      line-height:3rem;
     }
+
     p {
       margin: 0 0 3rem;
     }
@@ -55,6 +44,13 @@
       border-color: transparent #efe4e4;
     }
   </style>
+</head>
+<body>
+  <div class="words" contenteditable>
+  </div>
 
+  <script>
+    window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  </script>
 </body>
 </html>
