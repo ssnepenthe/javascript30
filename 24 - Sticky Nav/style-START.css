@@ -25,6 +25,10 @@ body {
   transition: transform 0.5s;
 }
 
+.fixed-nav .site-wrap {
+  transform: scale(1);
+}
+
 header {
   align-items: center;
   background: url(http://wes.io/iEgP/wow-so-deep.jpg) bottom center no-repeat;
@@ -50,6 +54,11 @@ nav {
   z-index: 1;
 }
 
+.fixed-nav nav {
+  box-shadow: 0 5px rgba(0, 0, 0, 0.1);
+  position: fixed;
+}
+
 nav ul {
   display: flex;
   list-style: none;
@@ -72,6 +81,10 @@ li.logo {
   max-width: 0;
   overflow: hidden;
   transition: all 0.5s;
+}
+
+.fixed-nav li.logo {
+  max-width: 500px;
 }
 
 li.logo a {
