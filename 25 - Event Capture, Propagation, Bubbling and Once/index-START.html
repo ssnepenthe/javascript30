@@ -41,10 +41,21 @@
       </div>
     </div>
 
-    <button></button>
+    <button>Hello</button>
 
     <script>
+      const button = document.querySelector('button');
+      const divs = document.querySelectorAll('div');
 
+      function logText(e) {
+        console.log(this.classList.value);
+      }
+
+      button.addEventListener('click', () => { console.log('clicked!'); }, { once: true });
+
+      divs.forEach(div => div.addEventListener('click', logText, {
+        capture: true
+      }));
     </script>
   </body>
 </html>
